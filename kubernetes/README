@@ -1,0 +1,5 @@
+PersistentVolume not to be configured differently on different platforms
+
+- Google File Store was chosen on google cloud as our RWX Volumes
+- Simple hostPath storage was used locally
+- The wally cluster used local-storage that would provides the PersistentVolume required for the Ceph Filesystem and a custom storage-class for volumes offered by Ceph. We followed instructions at [rook-getting-started](https://rook.io/docs/rook/latest/Getting-Started/quickstart/#create-a-ceph-cluster)

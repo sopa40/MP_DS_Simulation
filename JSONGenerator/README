@@ -1,0 +1,8 @@
+generator tool chain:
+
+- generate workdir files using the nextflow log command 
+> nextflow log <run-name> -f hash,workdir,name
+- generate the io_files using the notebooks
+- filter the strace report see filter.py --help for more info
+- merge the perf workdir and i/o file with the strace workdir and i/o file
+- run the json generator with the perf trace and the merged i/o file
