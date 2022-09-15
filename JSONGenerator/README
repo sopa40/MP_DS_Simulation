@@ -1,8 +1,18 @@
 generator tool chain:
 
 - generate workdir files using the nextflow log command 
-> nextflow log <run-name> -f hash,workdir,name
-- generate the io_files using the notebooks
+> nextflow log <job-name> -f hash,workdir,name
+
+- generate the unfiltered io_files using the generate_io_file script (large files)
+> python3 generate_io_file.py example_inputs/workdirs_perf.txt --work-dir '<nextflow-workdir>' --output example_inputs/unfiltered_perf.txt
+
+> python3 generate_io_file.py example_inputs/workdirs_strace.txt --work-dir '<nextflow-workdir>' --output example_inputs/unfiltered_strace.txt
+
 - filter the strace report see filter.py --help for more info
+> python3 filter.py example_inputs/workdirs_strace.txt --work-dir '<nextflow-workdir>' --io-file example_inputs/unfiltered_strace.txt --output example_inputs/filtered_strace.txt
+
 - merge the perf workdir and i/o file with the strace workdir and i/o file
+> python3 merge.py example_inputs/workdirs_strace.txt example_inputs/workdirs_perf.txt example_inputs/filtered_strace.txt example_inputs/unfiltered_perf.txt --output example_inputs/merged_io_file.txt
+
 - run the json generator with the perf trace and the merged i/o file
+> python3 json_generator.py example_inputs/trace.txt example_inputs/merged_io_file.txt --output example_inputs/workflow.json

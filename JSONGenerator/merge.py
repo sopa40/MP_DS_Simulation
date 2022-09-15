@@ -9,14 +9,16 @@ import re
 
 
 def hash_by_task_name(working_dir_by_hash):
-    result = collections.defaultdict(lambda: collections.defaultdict(lambda: list()))
+    result = collections.defaultdict(
+        lambda: collections.defaultdict(lambda: list()))
     for hash_id, v in working_dir_by_hash.items():
         result[v['task_name']][v['task_id']].append(hash_id)
 
     return result
 
 
-working_dir_pattern = re.compile(r"/[0-9a-z]{2}/[0-9a-z]{30}", flags=re.MULTILINE)
+working_dir_pattern = re.compile(
+    r"/[0-9a-z]{2}/[0-9a-z]{30}", flags=re.MULTILINE)
 tmp_dir_pattern = re.compile(r"/tmp/nxf\.[a-zA-Z0-9]{10}", flags=re.MULTILINE)
 
 
@@ -74,15 +76,14 @@ def match_perf_and_strace_run(strace_workdirs, perf_workdirs, strace_filtered_io
 
     strace_hash_by_task_name = hash_by_task_name(strace_workdirs)
     perf_hash_by_task_name = hash_by_task_name(perf_workdirs)
-    
-    print(strace_filtered_io_file)
-    strace_input_files, strace_output_files = common.load_input_output_file(strace_filtered_io_file, line_format=1)
-    perf_input_files, perf_output_files = common.load_input_output_file(perf_unfiltered_io_file, line_format=1)
 
-    print(strace_input_files['9f/5ac9ac'])
+    strace_input_files, strace_output_files = common.load_input_output_file(
+        strace_filtered_io_file)
+    perf_input_files, perf_output_files = common.load_input_output_file(
+        perf_unfiltered_io_file)
+
     strace_input_basename, strace_output_basename = reduce_to_basename(strace_input_files), reduce_to_basename(
         strace_output_files)
-    print(strace_input_basename['9f/5ac9ac'])
     perf_input_basename, perf_output_basename = reduce_to_basename(perf_input_files), reduce_to_basename(
         perf_output_files)
 
@@ -93,7 +94,8 @@ def match_perf_and_strace_run(strace_workdirs, perf_workdirs, strace_filtered_io
         for task_id, hash_ids in v.items():
             possible_matches = perf_hash_by_task_name[task_name][task_id]
             if len(possible_matches) != len(hash_ids):
-                raise Exception("Different Number of Tasks with the Same TaskID")
+                raise Exception("Different Number of Tasks with the Same TaskID %s %s Strace: %d vs Perf: %d" % (
+                    task_name, task_id, len(hash_ids), len(possible_matches)))
 
             for strace_id in hash_ids:
                 if strace_id in used_strace:
@@ -103,19 +105,23 @@ def match_perf_and_strace_run(strace_workdirs, perf_workdirs, strace_filtered_io
                 strace_sets = strace_input_basename[strace_id]
                 matches = None
 
-                matches = find_match_with_exact_size(strace_sets, possible_matches, perf_input_basename)
+                matches = find_match_with_exact_size(
+                    strace_sets, possible_matches, perf_input_basename)
                 if len(matches) == 0:
-                    matches = find_match_ignoring_size(strace_sets, possible_matches, perf_input_basename)
+                    matches = find_match_ignoring_size(
+                        strace_sets, possible_matches, perf_input_basename)
                     if len(matches) == 1:
                         logging.info("Merging with differing filesizes")
 
                 if len(matches) == 0:
-                    matches = find_match_with_least_changes(strace_sets, possible_matches, perf_input_basename)
+                    matches = find_match_with_least_changes(
+                        strace_sets, possible_matches, perf_input_basename)
                 if len(matches) == 0:
                     raise Exception('Cant merge %s with anything' % strace_id)
 
                 if len(matches) > 1:
-                    raise Exception('Ambiguous machtes when merging %s, (%s)' % (strace_id, ','.join(matches)))
+                    raise Exception('Ambiguous machtes when merging %s, (%s)' % (
+                        strace_id, ','.join(matches)))
 
                 used_strace.add(strace_id)
                 used_perf.add(matches[0])
@@ -132,16 +138,16 @@ def match_perf_and_strace_run(strace_workdirs, perf_workdirs, strace_filtered_io
 
 if __name__ == '__main__':
 
-    parser = argparse.ArgumentParser(description='Merge the Perf trace with the Strace io_file')
+    parser = argparse.ArgumentParser(
+        description='Merge the Perf trace with the Strace io_file')
     parser.add_argument('strace_workdirs', type=str,
                         help='path to the strace workdir file with the format <hash> <workdir> <name>. Can be generated using nextflow log')
     parser.add_argument('perf_workdirs', type=str,
                         help='path to the perf workdir file with the format <hash> <workdir> <name>. Can be generated using nextflow log')
     parser.add_argument('strace_io_file', type=str,
-                        help='path to the FILTERED strace io file workdir file with the format <hash> <workdir> <name>. Can be generated using nextflow log')
+                        help='path to the FILTERED strace io file')
     parser.add_argument('perf_unfiltered_io_file', type=str,
-                        help='path to the UNFILTERED perf io file workdir file with the format <hash> <workdir> <name>. Can be generated using nextflow log')
-
+                        help='path to the UNFILTERED perf io file')
 
     parser.add_argument('--output', dest='output', default='merged_io_files.txt', type=str,
                         help='path to the output file')
@@ -150,9 +156,9 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-
     logging.basicConfig()
     logging.root.setLevel(args.logging)
-    
-    in_file, out_file = match_perf_and_strace_run(args.strace_workdirs, args.perf_workdirs, args.strace_io_file, args.perf_unfiltered_io_file)
+
+    in_file, out_file = match_perf_and_strace_run(
+        args.strace_workdirs, args.perf_workdirs, args.strace_io_file, args.perf_unfiltered_io_file)
     common.write_in_out_file(in_file, out_file, args.output)

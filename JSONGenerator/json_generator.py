@@ -31,9 +31,9 @@ import argparse
 # resulting json file for each element, which is appended to the file each iteration
 
 TASK_NAME = 1
-N_INSTRUCTIONS = 8
-N_CYCLES = 9
-AVERAGE_CPU_USAGE = 10
+N_INSTRUCTIONS = 6
+N_CYCLES = 7
+AVERAGE_CPU_USAGE = 8
 
 ID_SCRIPT = 0
 NAME_SCRIPT = 1
