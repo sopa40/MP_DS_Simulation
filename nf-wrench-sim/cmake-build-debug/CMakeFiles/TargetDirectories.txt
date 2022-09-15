@@ -1,0 +1,7 @@
+/home/lego/Desktop/nf-wrench-sim-main/cmake-build-debug/CMakeFiles/nf-wrench-sim.dir
+/home/lego/Desktop/nf-wrench-sim-main/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/lego/Desktop/nf-wrench-sim-main/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/lego/Desktop/nf-wrench-sim-main/cmake-build-debug/CMakeFiles/list_install_components.dir
+/home/lego/Desktop/nf-wrench-sim-main/cmake-build-debug/CMakeFiles/install.dir
+/home/lego/Desktop/nf-wrench-sim-main/cmake-build-debug/CMakeFiles/install/local.dir
+/home/lego/Desktop/nf-wrench-sim-main/cmake-build-debug/CMakeFiles/install/strip.dir
