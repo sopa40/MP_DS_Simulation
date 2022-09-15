@@ -1,0 +1,85 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nextflow-input
+spec:
+  capacity:
+    storage: 600G
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: /<Google Filestore name>
+    server: <Google Filestore IP>
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nextflow-work
+spec:
+  capacity:
+    storage: 300G
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: /<Google Filestore name>
+    server: <Google Filestore IP>
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: jupyter
+spec:
+  capacity:
+    storage: 20G
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: /<Google Filestore name>
+    server: <Google Filestore IP>
+
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-input
+spec:
+  storageClassName: ""
+  volumeName: nextflow-input
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 600G # example value
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-work
+spec:
+  storageClassName: ""
+  volumeName: nextflow-work
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 300G # example value
+
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-jupyter
+spec:
+  storageClassName: ""
+  volumeName: jupyter
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20G # example value
+

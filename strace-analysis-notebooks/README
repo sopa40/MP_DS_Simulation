@@ -1,0 +1,3 @@
+notebooks need to be copied into the /notebook PersistentVolume once the Nextflow-Log-Analyzer Pod is running
+
+Difference between the two notebooks is that the google cloud notbook access date that is stored within an google cloud bucket where the local notebook assumes working directories are mounted within the container

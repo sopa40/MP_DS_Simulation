@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-work
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 50Gi   
+  hostPath:
+    path: /host-data/work   # the path used in the kind-config.yaml
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-input
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 50Gi   
+  hostPath:
+    path: /host-data/data   # the path used in the kind-config.yaml
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-jupyter
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 5Gi   
+  hostPath:
+    path: /host-data/jupyter   # the path used in the kind-config.yaml
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-input
+spec:
+  volumeName: pv-input     # must be the name of the volume above
+  # storageClassName: rook-cephfs
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi   
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-work
+spec:
+  volumeName: pv-work     # must be the name of the volume above
+  # storageClassName: rook-cephfs
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi   
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-jupyter
+spec:
+  volumeName: pv-jupyter     # must be the name of the volume above
+  # storageClassName: rook-cephfs
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi   
