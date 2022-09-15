@@ -1,0 +1,9 @@
+/otherTraces
+/exampleTracePlots
+/rendered/*
+/models/*
+/plots/*
+!/rendered/.gitkeep 
+!/models/.gitkeep 
+!/plots/.gitkeep 
+.DS_Store

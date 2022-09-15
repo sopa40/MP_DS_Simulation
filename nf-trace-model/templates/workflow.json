@@ -1,0 +1,11 @@
+{
+	"name": "$$${task}_name",
+	"numberOfInstructions": "$$${task}_instructions",
+	"rChar": "$$${task}_rchar",
+	"wChar": "$$${task}_wchar",
+	"numberOfTimesRun": "$$${task}_execution_count",
+	"inputFiles": [
+	],
+	"outputFiles": [
+	]
+}

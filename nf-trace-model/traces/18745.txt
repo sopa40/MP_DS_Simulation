@@ -1,0 +1,4 @@
+task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar	instructions
+1	d1/21ca31	3725	makeBWAIndex (Mammoth_MT_Krause.fasta)	COMPLETED	0	2022-05-18 02:51:50.990	5.1s	186ms	50.6%	3.3 MB	7.6 MB	200.14 KB	80 KB	70154656
+3	d1/21ca31	3725	makeBWAIndex (Mammoth_MT_Krause.fasta)	COMPLETED	0	2022-05-18 02:51:50.990	5.1s	186ms	40.2%	3.1 MB	8.1 MB	199.5 KB	90 KB	70162250
+2	5f/d7e4af	4299	makeFastaIndex (Mammoth_MT_Krause.fasta)	COMPLETED	0	2022-05-18 02:51:56.110	2.4s	63ms	88.8%	13.1 MB	15.4 MB	162.9 KB	196 B	90451221
