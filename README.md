@@ -11,9 +11,9 @@ In this repo you can find all the neccessary steps to simulate the workflow, ple
 Step (4) can be performed using /nf-wrench-sim folder, which already contains all needed input for running the simulation. Please see corresponding Readme for more information.
 
 ## Contributions
-Notebook - Lukas
-Filter / Merge - Lukas
-Wrench - Nazar
-JsonGenerator - Nazar
-Prediction Model - Luyanda
-Testing with different workflows - Luyanda
+- Notebook - Lukas
+- Filter / Merge - Lukas
+- Wrench - Nazar
+- JsonGenerator - Nazar
+- Prediction Model - Luyanda
+- Testing with different workflows - Luyanda
